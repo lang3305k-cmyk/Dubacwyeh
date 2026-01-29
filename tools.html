@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WormGPT - System Tools</title>
+    <style>
+        :root { --main: #ff0000; --bg: #050505; }
+        * { box-sizing: border-box; }
+        body { background: var(--bg); color: #eee; font-family: 'Courier New', monospace; padding: 15px; margin: 0; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--main); padding-bottom: 10px; margin-bottom: 20px; }
+        .tool-card { background: #0a0a0a; border: 1px solid #222; padding: 15px; margin-bottom: 15px; border-radius: 4px; box-shadow: inset 0 0 10px #ff000011; }
+        .title { color: var(--main); font-weight: bold; margin-bottom: 10px; font-size: 13px; text-transform: uppercase; }
+        input, textarea { width: 100%; background: #000; border: 1px solid #333; color: var(--main); padding: 10px; margin-bottom: 10px; outline: none; }
+        button { width: 100%; background: var(--main); color: #000; border: none; padding: 12px; font-weight: bold; cursor: pointer; }
+        .res { background: #000; color: #0f0; font-size: 11px; padding: 10px; border: 1px solid #111; min-height: 45px; white-space: pre-wrap; margin-top: 5px; line-height: 1.5; }
+        .back-btn { color: var(--main); text-decoration: none; font-size: 12px; border: 1px solid var(--main); padding: 5px 10px; }
+    </style>
+</head>
+<body>
+<audio id="bgm" loop><source src="music.mp3" type="audio/mpeg"></audio>
+<div class="header">
+    <a href="main.html" class="back-btn">[ BACK_TO_MAIN ]</a>
+    <div id="live-clock" style="color:var(--main); font-weight:bold; font-size: 12px;">00:00:00</div>
+</div>
+<div class="tool-card"><div class="title">> WA_INJECTOR (EMPEROR_MSG)</div><input type="number" id="waN" placeholder="Target: 628xxx"><textarea id="waM" placeholder="Pesan payload..."></textarea><button onclick="sendW()">SEND_PAYLOAD</button></div>
+<div class="tool-card"><div class="title">> ADVANCED_SCANNER</div><button onclick="scan()">RUN_SYSTEM_SCAN</button><div id="scanRes" class="res">Waiting...</div></div>
+<div class="tool-card"><div class="title">> PING_TESTER</div><button onclick="pingTest()" style="background:#222; color:white; border:1px solid #444;">CHECK_LATENCY</button><div id="pingRes" class="res">Network: Idle</div></div>
+
+<script>
+    const audio = document.getElementById('bgm');
+    window.onload = () => {
+        const t = localStorage.getItem('audioTime'); if(t) audio.currentTime = t;
+        audio.play().catch(() => { document.body.onclick = () => { audio.play(); document.body.onclick = null; }});
+    };
+    setInterval(() => { 
+        localStorage.setItem('audioTime', audio.currentTime); 
+        document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('id-ID');
+    }, 500);
+
+    function sendW() {
+        const n = document.getElementById('waN').value; const m = document.getElementById('waM').value;
+        window.open(`https://api.whatsapp.com/send?phone=${n}&text=${encodeURIComponent("┏━━━━┓\n┃WORM-GPT┃\n┗━━━━┛\nBy Emperor ☠️\n\n"+m)}`);
+    }
+    async function scan() {
+        const r = document.getElementById('scanRes'); r.innerText = "Targeting...";
+        const f = await fetch('https://api.ipify.org?format=json'); const d = await f.json();
+        r.innerText = `[+] IP: ${d.ip}\n[+] PLATFORM: ${navigator.platform}\n[+] STATUS: COMPROMISED`;
+    }
+    function pingTest() {
+        const s = Date.now(); const r = document.getElementById('pingRes'); r.innerText = "Pinging...";
+        fetch('https://dns.google/resolve?name=google.com', { mode: 'no-cors' }).then(() => {
+            r.innerText = `[+] LATENCY: ${Date.now() - s}ms\n[+] QUALITY: EXCELLENT`;
+        });
+    }
+</script>
+</body>
+</html>
