@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WormGPT - Developer</title>
+    <style>
+        :root { --main: #ff0000; --bg: #050505; --card: #0a0a0a; --gold: #ffd700; }
+        * { box-sizing: border-box; }
+        body { background: var(--bg); color: #eee; font-family: 'Courier New', monospace; margin: 0; padding: 0; overflow-x: hidden; }
+        .header { position: fixed; top: 0; width: 100%; padding: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 100; border-bottom: 1px solid var(--main); display: flex; align-items: center; }
+        .back-btn { color: var(--main); text-decoration: none; font-weight: bold; font-size: 14px; }
+        .banner-container { width: 100%; height: 200px; margin-top: 50px; overflow: hidden; border-bottom: 2px solid var(--main); position: relative; }
+        .banner-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .banner-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent, var(--bg)); }
+        .profile-section { display: flex; flex-direction: column; align-items: center; margin-top: -60px; position: relative; z-index: 10; }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--main); box-shadow: 0 0 20px var(--main); object-fit: cover; background: #000; }
+        .dev-name { margin-top: 15px; font-size: 22px; font-weight: bold; color: #fff; letter-spacing: 2px; text-shadow: 0 0 10px var(--main); }
+        .dev-title { color: var(--main); font-size: 12px; margin-top: 5px; opacity: 0.8; }
+        .info-container { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .info-card { background: var(--card); border: 1px solid #222; padding: 15px; border-radius: 4px; border-left: 4px solid var(--main); }
+        .label { font-size: 10px; color: var(--main); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .value { font-size: 14px; color: #fff; font-weight: bold; }
+        .bio-box { font-style: italic; color: #bbb; line-height: 1.5; font-size: 13px; }
+        .wa-btn { background: #25d366; color: #000; text-align: center; padding: 15px; border-radius: 4px; text-decoration: none; font-weight: bold; margin-top: 10px; display: block; }
+        .quote { text-align: center; padding: 20px; color: var(--main); font-size: 12px; border-top: 1px solid #111; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<audio id="bgm" loop><source src="music.mp3" type="audio/mpeg"></audio>
+<div class="header"><a href="main.html" class="back-btn">[ < ESCAPE ]</a></div>
+<div class="banner-container">
+    <video autoplay muted loop playsinline><source src="dev2.mp4" type="video/mp4"></video>
+    <div class="banner-overlay"></div>
+</div>
+<div class="profile-section">
+    <img src="dev1.png" alt="Developer" class="profile-img">
+    <div class="dev-name">LANGZ</div>
+    <div class="dev-title">"The Monarch Of Cyber"</div>
+</div>
+<div class="info-container">
+    <div class="info-card"><div class="label">Primary Job</div><div class="value">Chief Exploit Officer (CEO)</div></div>
+    <div class="info-card"><div class="label">System Rank</div><div class="value" style="color:var(--gold)">Emperor</div></div>
+    <div class="info-card"><div class="label">Operational History</div><div class="value">- Bypassed Global AI Restrictions<br>- Founder of WormGPT Ecosystem<br>- Founder Of Cygnus dev1</div></div>
+    <div class="info-card"><div class="label">Personal Bio</div><div class="bio-box">"DDoS mu menutupi domain ku, kau terlalu lemah, enyahlah dihadapan sang raja."</div></div>
+    <a href="https://wa.me/6285928994509" class="wa-btn">CONTACT VIA WHATSAPP</a>
+    <div class="quote">"Logic is a tool, but imagination is the weapon." <br>— Langz And Felix </div>
+</div>
+
+<script>
+    const audio = document.getElementById('bgm');
+    window.onload = () => {
+        const t = localStorage.getItem('audioTime'); if(t) audio.currentTime = t;
+        audio.play().catch(() => { document.body.onclick = () => { audio.play(); document.body.onclick = null; }});
+    };
+    setInterval(() => { localStorage.setItem('audioTime', audio.currentTime); }, 500);
+</script>
+</body>
+</html>
