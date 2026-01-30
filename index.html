@@ -53,6 +53,25 @@
     </script>
 </body>
 </html>
+            audio.play().catch(e => console.log(e));
+            startLoading();
+        }
+        function startLoading() {
+            const logs = ["> BYPASSING KERNEL...", "> SYNCING AUDIO...", "> INJECTING EXPLOITS...", "> ACCESS GRANTED!"];
+            let i = 0;
+            const interval = setInterval(() => {
+                document.getElementById('status').innerText = logs[i];
+                document.getElementById('p-bar').style.width = ((i + 1) * (100 / logs.length)) + "%";
+                i++;
+                if (i >= logs.length) {
+                    clearInterval(interval);
+                    setTimeout(() => { window.location.href = "main.html"; }, 1000);
+                }
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
             document.getElementById('overlay').style.display = 'none';
             audio.play().catch(e => console.log(e));
             startLoading();
